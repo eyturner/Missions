@@ -1,0 +1,345 @@
+:root {
+  --missionModalColor: #ffcc5e;
+  --taskSetModalColor: #32a883;
+}
+
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  min-width: 175px;
+  background: rgba(245, 245, 245);
+}
+
+#sidebar h3 {
+  margin: 0;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.sidebarMissionTitle {
+  width: 80%;
+  cursor: pointer;
+}
+
+#landingDiv {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#landingImage {
+  width: 45%;
+}
+
+#addMissionBtn {
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+#AllMissions {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#sidebarMissionDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebarMission {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 2% 15px;
+}
+
+.sidebarMission:hover {
+  background: rgba(235, 235, 235);
+}
+
+.selected {
+  background: rgba(225, 225, 225) !important;
+}
+.sidebarCloseBtn {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+#content {
+  display: flex;
+  margin-left: 20%;
+  width: 75%;
+  flex-direction: column;
+}
+
+.mission {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+}
+
+#missionHeaderDiv {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+#addTaskSetBtn {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#addTaskSetBtn:hover,
+#addMissionBtn:hover,
+.sidebarCloseBtn:hover,
+.addTaskBtn:hover {
+  transform: scale(1.5);
+  transition: 0.1s ease-in;
+}
+
+.optionsBtn:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.1s ease-in;
+}
+
+.addTaskBtn {
+  margin-left: -30px;
+}
+
+.taskSetNameOptions {
+  display: flex;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.taskSetNameOptions p,
+button {
+  margin-bottom: 0;
+  font-size: 24px;
+  padding-bottom: 0 !important;
+}
+
+.optionsBtn {
+  font-size: 36px;
+  height: auto;
+}
+
+.taskSet {
+  margin: 1% 0;
+  margin-top: 0;
+}
+
+.task {
+  display: flex;
+  padding-left: 5px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.task p {
+  margin-bottom: 0;
+  margin-left: 2%;
+}
+
+.newTaskInput {
+  margin-left: calc(19px + 2%);
+  margin-bottom: 2%;
+  border: none;
+  border-bottom: 1px solid #888;
+  box-shadow: none;
+  outline: none;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  min-width: 475px;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  color: white;
+}
+
+.modal-body {
+  padding: 25px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  color: white;
+}
+
+#deleteModalBody {
+  justify-content: space-around !important;
+}
+
+.missionModal {
+  background-color: var(--missionModalColor);
+}
+
+.taskSetModal {
+  background-color: var(--taskSetModalColor);
+}
+
+.deleteMissionModal {
+  background-color: red;
+}
+
+.submitBtn:hover {
+  color: #000;
+  cursor: pointer;
+}
+
+.newMissionForm,
+.newTaskSetForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modalTitleDiv {
+  display: flex;
+  align-items: center;
+}
+
+#missionTitleLabel {
+  margin: 0;
+  margin-right: 62px;
+}
+
+#taskSetTitleLabel {
+  margin: 0;
+  margin-right: 19px;
+}
+
+#titleInput {
+  width: 65%;
+}
+
+.newMissionDescriptionDiv,
+.newTaskSetNoteDiv {
+  margin-top: 10px;
+}
+
+#descriptionInput,
+#noteInput {
+  width: 65%;
+}
+
+.newMissionDescriptionDiv label {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.newTaskSetNoteDiv label {
+  margin: 0;
+  margin-right: 15px;
+}
+
+.deleteBtn,
+.saveBtn {
+  border: 1px solid white;
+  border-radius: 15px;
+}
+
+.deleteBtn:hover {
+  border: 1px solid red;
+  background-color: rgba(255, 104, 104, 0.308);
+  transition: 0.3s;
+}
+
+.saveBtn:hover {
+  border: 1px solid green;
+  background-color: rgba(109, 255, 104, 0.26);
+  transition: 0.3s;
+}
