@@ -109,6 +109,7 @@ body {
   cursor: pointer;
 }
 
+.deleteTaskSetBtn:hover,
 #addTaskSetBtn:hover,
 #addMissionBtn:hover,
 .sidebarCloseBtn:hover,
@@ -342,4 +343,15 @@ button {
   border: 1px solid green;
   background-color: rgba(109, 255, 104, 0.26);
   transition: 0.3s;
+}
+
+.deleteTaskSetBtn {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.taskSetBtnDiv {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
