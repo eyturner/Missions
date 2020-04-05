@@ -39,10 +39,6 @@ const addMission = (mission) => {
       clearMissionView();
       loadLandingPage();
     });
-    let saveButton = document.querySelector(".saveBtn");
-    saveButton.addEventListener("click", () => {
-      removeModal();
-    });
   });
 
   sidebarMission.appendChild(sidebarMissionTitle);

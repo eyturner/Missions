@@ -279,6 +279,9 @@ const deleteMissionModal = () => {
   let saveButton = document.createElement("button");
   saveButton.classList.add("saveBtn");
   saveButton.innerHTML = "No";
+  saveButton.addEventListener("click", () => {
+    removeModal();
+  })
   modalBodyDiv.appendChild(saveButton);
 
   modalContentDiv.appendChild(modalHeaderDiv);
@@ -291,6 +294,48 @@ const deleteMissionModal = () => {
 
   return modalDiv;
 };
+
+const deleteTaskSetModal = () => {
+  let modalDiv = createNewModal();
+
+  window.onclick = (e) => {
+    if (e.target == modalDiv) {
+      removeModal();
+    }
+  };
+
+  let modalContentDiv = document.createElement("div");
+  modalContentDiv.classList.add("modal-content");
+
+  let modalHeaderDiv = createModalHead("Delete TaskSet?", "deleteMissionModal");
+
+  let modalBodyDiv = document.createElement("div");
+  modalBodyDiv.classList.add("modal-body");
+  modalBodyDiv.id = "deleteModalBody";
+
+  let deleteButton = document.createElement("button");
+  deleteButton.classList.add("deleteBtn");
+  deleteButton.innerHTML = "Yes";
+  modalBodyDiv.appendChild(deleteButton);
+
+  let saveButton = document.createElement("button");
+  saveButton.classList.add("saveBtn");
+  saveButton.innerHTML = "No";
+  saveButton.addEventListener("click", () => {
+    removeModal();
+  })
+  modalBodyDiv.appendChild(saveButton);
+
+  modalContentDiv.appendChild(modalHeaderDiv);
+  modalContentDiv.appendChild(modalBodyDiv);
+
+  modalDiv.appendChild(modalContentDiv);
+  modalDiv.style.display = "block";
+
+  document.body.appendChild(modalDiv);
+
+  return modalDiv;
+}
 
 const removeModal = () => {
   let modalDiv = document.getElementById("myModal");
@@ -305,4 +350,5 @@ export {
   removeModal,
   editTaskSetModal,
   deleteMissionModal,
+  deleteTaskSetModal
 };

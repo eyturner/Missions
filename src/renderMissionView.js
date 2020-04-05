@@ -1,4 +1,4 @@
-import { renderTaskSetModal, removeModal, editTaskSetModal } from "./Modal.js";
+import { renderTaskSetModal, removeModal, editTaskSetModal, deleteTaskSetModal } from "./Modal.js";
 import { TaskSet } from "./TaskSet.js";
 import { Task } from "./Task.js";
 
@@ -146,6 +146,19 @@ const addTaskSet = (taskSet) => {
   let taskSetNoteH6 = document.createElement("h6");
   taskSetNoteH6.innerHTML = taskSetNote;
 
+  let deleteTaskSetBtn = document.createElement("h4");
+  deleteTaskSetBtn.classList.add('deleteTaskSetBtn');
+  deleteTaskSetBtn.innerHTML = ('&times;')
+  deleteTaskSetBtn.addEventListener("click", () => {
+    deleteTaskSetModal();
+    let confirmBtn = document.querySelector('.deleteBtn');
+    confirmBtn.addEventListener("click", () => {
+      currentMission.removeTaskSet(taskSet);
+      removeModal();
+      renderMissionView(currentMission);
+    })
+  })
+
   let optionsBtn = document.createElement("h4");
   optionsBtn.classList.add("optionsBtn");
   optionsBtn.innerHTML = "...";
@@ -158,15 +171,20 @@ const addTaskSet = (taskSet) => {
       }
     });
 
-    let submitBtn = document.getElementById("submitBtn");
+    let submitBtn = document.querySelector(".submitBtn");
     submitBtn.addEventListener("click", () => {
       submitEditModal(taskSet);
     });
   });
 
+  let taskSetBtnDiv = document.createElement("div");
+  taskSetBtnDiv.appendChild(deleteTaskSetBtn);
+  taskSetBtnDiv.appendChild(optionsBtn);
+  taskSetBtnDiv.classList.add("taskSetBtnDiv");
+
   taskSetNameOptionsDiv.appendChild(taskSetTitleH4);
   taskSetNameOptionsDiv.appendChild(taskSetNoteH6);
-  taskSetNameOptionsDiv.appendChild(optionsBtn);
+  taskSetNameOptionsDiv.appendChild(taskSetBtnDiv);
 
   taskSetDiv.appendChild(taskSetNameOptionsDiv);
 
