@@ -1,6 +1,7 @@
 :root {
   --missionModalColor: #ffcc5e;
   --taskSetModalColor: #32a883;
+  --deleteModalColor: rgb(233, 104, 104);
 }
 
 * {
@@ -272,7 +273,7 @@ button {
 }
 
 .deleteMissionModal {
-  background-color: red;
+  background-color: var(--deleteModalColor);
 }
 
 .submitBtn:hover {
@@ -334,14 +335,12 @@ button {
 }
 
 .deleteBtn:hover {
-  border: 1px solid red;
-  background-color: rgba(255, 104, 104, 0.308);
+  border: 1px solid black;
   transition: 0.3s;
 }
 
 .saveBtn:hover {
-  border: 1px solid green;
-  background-color: rgba(109, 255, 104, 0.26);
+  border: 1px solid black;
   transition: 0.3s;
 }
 
@@ -354,4 +353,9 @@ button {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+}
+
+.strikeout {
+  text-decoration: line-through;
+  color: rgba(139, 139, 139);
 }
