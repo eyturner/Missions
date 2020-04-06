@@ -37,6 +37,7 @@ const addMission = (mission) => {
       removeMissionFromSidebar(sidebarMissionDiv, sidebarMission);
       removeMission(sidebarMission);
       clearMissionView();
+      removeModal();
       loadLandingPage();
     });
   });

@@ -1,29 +1,31 @@
-import { renderTaskSetModal, removeModal, editTaskSetModal, deleteTaskSetModal } from "./Modal.js";
-import { TaskSet } from "./TaskSet.js";
+import {
+  renderTaskSetModal,
+  removeModal,
+  editTaskSetModal,
+  deleteTaskSetModal,
+} from "./Modal.js";
 import { Task } from "./Task.js";
+import { submitEditModal, submitNewTaskSet } from "./submitFuncs.js";
+import { getSavedMissions, updateLocalStorage } from "./localStorage.js";
+import { getMissionTaskSets, removeTaskSetFromMission } from "./Mission.js";
+import { getTaskSetTasks, addTaskToTaskSet, removeTaskFromTaskSet } from "./TaskSet.js";
 
 let missionDiv = document.querySelector(".mission");
 let currentMission = null;
-let allMissions = [];
 
-const getAllMissions = () => {
-  return allMissions;
-};
+let allMissions = getSavedMissions();
 
-const submitEditModal = (taskSet) => {
-  let newTitle = document.getElementById("titleInput").value;
-  let newNote = document.getElementById("noteInput").value;
-  taskSet.setTitle(newTitle);
-  taskSet.setNote(newNote);
-  removeModal();
-  renderMissionView(currentMission);
-};
 const removeMission = (toRemove) => {
   for (let i = 0; i < allMissions.length; i++) {
     if (allMissions[i].id == toRemove.id) {
       allMissions.splice(i, 1);
+      updateLocalStorage(allMissions);
     }
   }
+};
+
+const getAllMissions = () => {
+  return allMissions;
 };
 
 const hideLandingPage = () => {
@@ -37,22 +39,6 @@ const setCurrentMission = (mission) => {
 
 const setMissionID = (id) => {
   missionDiv.id = id;
-};
-
-const submitNewTaskSet = (mission) => {
-  let newTaskSetForm = document.querySelector(".newTaskSetForm");
-  let newTaskSetTitle = newTaskSetForm.elements[0].value;
-  let newTaskSetNote = newTaskSetForm.elements[1].value;
-
-  let newTaskSet = new TaskSet(
-    newTaskSetTitle,
-    mission.getTaskSets().length,
-    newTaskSetNote
-  );
-
-  mission.addTaskSet(newTaskSet);
-
-  return newTaskSet;
 };
 
 const addTitle = (title) => {
@@ -106,15 +92,19 @@ const addTask = (task, taskSet) => {
   checkButton.type = "checkbox";
   checkButton.addEventListener("change", () => {
     if (checkButton.checked) {
-      taskSet.removeTask(task);
+      removeTaskFromTaskSet(taskSet, task);
+      updateLocalStorage(allMissions);
+      taskDiv.classList.toggle("strikeout");
       if (taskSet.isEmpty()) {
         renderMissionView(currentMission);
       }
     } else {
-      if (!currentMission.getTaskSets().includes(taskSet)) {
+      if (getMissionTaskSets(currentMission).includes(taskSet)) {
         currentMission.addTaskSet(taskSet);
       }
       taskSet.addTask(task);
+      updateLocalStorage(allMissions);
+      taskDiv.classList.toggle("strikeout");
     }
   });
 
@@ -131,7 +121,7 @@ const addTask = (task, taskSet) => {
 const addTaskSet = (taskSet) => {
   let taskSetTitle = taskSet.title;
   let taskSetNote = taskSet.note;
-  let taskSetTasks = taskSet.getTasks();
+  let taskSetTasks = getTaskSetTasks(taskSet);
 
   let taskSetDiv = document.createElement("div");
   taskSetDiv.classList.add("taskSet");
@@ -147,17 +137,18 @@ const addTaskSet = (taskSet) => {
   taskSetNoteH6.innerHTML = taskSetNote;
 
   let deleteTaskSetBtn = document.createElement("h4");
-  deleteTaskSetBtn.classList.add('deleteTaskSetBtn');
-  deleteTaskSetBtn.innerHTML = ('&times;')
+  deleteTaskSetBtn.classList.add("deleteTaskSetBtn");
+  deleteTaskSetBtn.innerHTML = "&times;";
   deleteTaskSetBtn.addEventListener("click", () => {
     deleteTaskSetModal();
-    let confirmBtn = document.querySelector('.deleteBtn');
+    let confirmBtn = document.querySelector(".deleteBtn");
     confirmBtn.addEventListener("click", () => {
-      currentMission.removeTaskSet(taskSet);
+      removeTaskSetFromMission(currentMission, taskSet);
       removeModal();
+      updateLocalStorage(allMissions);
       renderMissionView(currentMission);
-    })
-  })
+    });
+  });
 
   let optionsBtn = document.createElement("h4");
   optionsBtn.classList.add("optionsBtn");
@@ -168,12 +159,18 @@ const addTaskSet = (taskSet) => {
     editModal.addEventListener("keydown", (e) => {
       if (e.keyCode == 13) {
         submitEditModal(taskSet);
+        removeModal();
+        updateLocalStorage(allMissions);
+        renderMissionView(currentMission);
       }
     });
 
     let submitBtn = document.querySelector(".submitBtn");
     submitBtn.addEventListener("click", () => {
       submitEditModal(taskSet);
+      removeModal();
+      updateLocalStorage(allMissions);
+      renderMissionView(currentMission);
     });
   });
 
@@ -200,7 +197,8 @@ const addTaskSet = (taskSet) => {
   newTaskInput.addEventListener("keydown", (e) => {
     if (e.keyCode == 13) {
       let newTaskName = newTaskInput.value;
-      taskSet.addTask(new Task(newTaskName, taskSetTasks.length, "Eventually"));
+      let newTask = new Task(newTaskName, taskSetTasks.length, "Eventually");
+      addTaskToTaskSet(taskSet, newTask);
       renderMissionView(currentMission);
     }
   });
@@ -218,13 +216,14 @@ const renderMissionView = (mission) => {
   clearMissionView();
   let missionTitle = mission.title;
   let missionDescription = mission.description;
-  let missionTaskSets = mission.getTaskSets();
+  let missionTaskSets = getMissionTaskSets(mission);
 
   addTitle(missionTitle);
   addDescription(missionDescription);
   setMissionID(mission.id);
   for (let i = 0; i < missionTaskSets.length; i++) {
     let newTaskSet = addTaskSet(missionTaskSets[i]);
+    updateLocalStorage(allMissions);
     missionDiv.appendChild(newTaskSet);
   }
 };
@@ -235,6 +234,6 @@ export {
   addTask,
   clearMissionView,
   setCurrentMission,
-  getAllMissions,
   removeMission,
+  getAllMissions,
 };

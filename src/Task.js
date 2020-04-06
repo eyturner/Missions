@@ -4,21 +4,29 @@ function Task(title, id, dueDate) {
   this.dueDate = dueDate;
   this.isComplete = false;
 
-  this.setDueDate = function (newDueDate) {
-    this.dueDate = newDueDate;
-  };
+  // this.setDueDate = function (newDueDate) {
+  //   this.dueDate = newDueDate;
+  // };
 
-  this.setTitle = function (newTitle) {
-    this.title = newTitle;
-  };
+  // this.setTitle = function (newTitle) {
+  //   this.title = newTitle;
+  // };
 
-  this.getId = function () {
-    return this.id;
-  };
-
-  this.completeTask = function () {
-    this.isComplete = true;
-  };
+  // this.completeTask = function () {
+  //   this.isComplete = true;
+  // };
 }
 
-export { Task };
+const setTaskDueDate = (Task, newDueDate) => {
+  Task.dueDate = newDueDate;
+};
+
+const setTaskTitle = (Task, newTitle) => {
+  Task.title = newTitle;
+};
+
+const completeTask = (Task) => {
+  Task.isComplete = true;
+};
+
+export { Task, setTaskDueDate, setTaskTitle, completeTask };

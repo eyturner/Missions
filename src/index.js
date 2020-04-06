@@ -2,19 +2,15 @@ import { renderMissionModal, removeModal } from "./Modal.js";
 
 import { renderMainView, addMission } from "./viewController.js";
 
-import {
-  renderMissionView,
-  setCurrentMission,
-  getAllMissions,
-} from "./renderMissionView.js";
-
-import { testMission, testMissionTwo } from "./testMission.js";
+import { renderMissionView, setCurrentMission } from "./renderMissionView.js";
 
 import { Mission } from "./Mission.js";
 
+import { updateLocalStorage } from "./localStorage.js";
+
+import { getAllMissions } from "./renderMissionView.js";
+
 let allMissions = getAllMissions();
-allMissions.push(testMission);
-allMissions.push(testMissionTwo);
 let missionID = allMissions.length;
 
 renderMainView(allMissions);
@@ -30,17 +26,10 @@ const submitNewMission = () => {
     newMissionDescription
   );
   allMissions.push(newMission);
+  updateLocalStorage(allMissions);
   addMission(newMission);
   return newMission;
 };
-
-// const getMissionByID = (id) => {
-//   for (let i = 0; i < allMissions.length; ++i) {
-//     if (allMissions[i].getID() == id) {
-//       return allMissions[i];
-//     }
-//   }
-// };
 
 const RenderNewMissionView = () => {
   let newMission = submitNewMission();

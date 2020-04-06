@@ -1,3 +1,5 @@
+import {getTaskSetTitle, getTaskSetNote} from "./TaskSet.js";
+
 const createNewModal = () => {
   let modalDiv = document.createElement("div");
   modalDiv.id = "myModal";
@@ -123,7 +125,7 @@ const editTaskSetModalBody = (taskSet) => {
 
   let modalTitleInput = document.createElement("input");
   modalTitleInput.id = "titleInput";
-  modalTitleInput.value = taskSet.getTitle();
+  modalTitleInput.value = getTaskSetTitle(taskSet);
 
   let titleLabel = document.createElement("label");
   titleLabel.id = "taskSetTitleLabel";
@@ -138,7 +140,7 @@ const editTaskSetModalBody = (taskSet) => {
 
   let TaskSetNoteInput = document.createElement("input");
   TaskSetNoteInput.id = "noteInput";
-  TaskSetNoteInput.value = taskSet.getNote();
+  TaskSetNoteInput.value = getTaskSetNote(taskSet);
 
   let descriptionLabel = document.createElement("label");
   descriptionLabel.id = "taskSetDescriptionLabel";
@@ -281,7 +283,7 @@ const deleteMissionModal = () => {
   saveButton.innerHTML = "No";
   saveButton.addEventListener("click", () => {
     removeModal();
-  })
+  });
   modalBodyDiv.appendChild(saveButton);
 
   modalContentDiv.appendChild(modalHeaderDiv);
@@ -323,7 +325,7 @@ const deleteTaskSetModal = () => {
   saveButton.innerHTML = "No";
   saveButton.addEventListener("click", () => {
     removeModal();
-  })
+  });
   modalBodyDiv.appendChild(saveButton);
 
   modalContentDiv.appendChild(modalHeaderDiv);
@@ -335,7 +337,7 @@ const deleteTaskSetModal = () => {
   document.body.appendChild(modalDiv);
 
   return modalDiv;
-}
+};
 
 const removeModal = () => {
   let modalDiv = document.getElementById("myModal");
@@ -350,5 +352,5 @@ export {
   removeModal,
   editTaskSetModal,
   deleteMissionModal,
-  deleteTaskSetModal
+  deleteTaskSetModal,
 };

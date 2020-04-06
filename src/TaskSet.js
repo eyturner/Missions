@@ -11,9 +11,6 @@ function TaskSet(title, id, note) {
   this.getTitle = function () {
     return this.title;
   };
-  this.getId = function () {
-    return this.id;
-  };
 
   this.getNote = function () {
     return this.note;
@@ -52,4 +49,53 @@ function TaskSet(title, id, note) {
   };
 }
 
-export { TaskSet };
+const getTaskSetTitle = (taskSet) => {
+  return taskSet.title;
+};
+
+const getTaskSetNote = (taskSet) => {
+  return taskSet.note;
+};
+
+const getTaskSetTasks = (taskSet) => {
+  return taskSet.taskArr;
+};
+
+const setTaskSetTitle = (taskSet, newTitle) => {
+  taskSet.title = newTitle;
+};
+
+const setTaskSetNote = (taskSet, newNote) => {
+  taskSet.note = newNote;
+};
+
+const addTaskToTaskSet = (taskSet, task) => {
+  taskSet.taskArr.push(task);
+};
+
+const taskSetIsEmpty = (taskSet) => {
+  if (taskSet.taskArr.length == 0) {
+    return true;
+  }
+  return false;
+};
+
+const removeTaskFromTaskSet = (taskSet, task) => {
+  for (let i = 0; i < taskSet.taskArr.length; ++i) {
+    if (taskSet.taskArr[i] == task) {
+      taskSet.taskArr.splice(i, 1);
+    }
+  }
+};
+
+export {
+  TaskSet,
+  getTaskSetTitle,
+  getTaskSetNote,
+  getTaskSetTasks,
+  setTaskSetTitle,
+  setTaskSetNote,
+  addTaskToTaskSet,
+  taskSetIsEmpty,
+  removeTaskFromTaskSet,
+};

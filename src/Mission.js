@@ -33,4 +33,28 @@ function Mission(title, id, description) {
   };
 }
 
-export { Mission };
+// const getMissionID = (mission) => {
+//   return mission.id;
+// }
+
+// const setMissionDescription = (mission, newDesc) => {
+//   mission.description = newDesc;
+// }
+
+const addTaskSetToMission = (mission, taskSet) => {
+  mission.taskSetArr.push(taskSet);
+}
+
+const getMissionTaskSets = (mission) => {
+  return mission.taskSetArr;
+};
+
+const removeTaskSetFromMission = (mission, taskSet) => {
+  for (let i = 0; i < mission.taskSetArr.length; i++) {
+    if(taskSet == mission.taskSetArr[i]) {
+      mission.taskSetArr.splice(i,1);
+    }
+  }
+}
+
+export { Mission, getMissionTaskSets, addTaskSetToMission, removeTaskSetFromMission };
