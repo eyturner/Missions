@@ -7,8 +7,8 @@ import {
 import { Task } from "./Task.js";
 import { submitEditModal, submitNewTaskSet } from "./submitFuncs.js";
 import { getSavedMissions, updateLocalStorage } from "./localStorage.js";
-import { getMissionTaskSets, removeTaskSetFromMission } from "./Mission.js";
-import { getTaskSetTasks, addTaskToTaskSet, removeTaskFromTaskSet } from "./TaskSet.js";
+import { getMissionTaskSets, removeTaskSetFromMission, addTaskSetToMission } from "./Mission.js";
+import { getTaskSetTasks, addTaskToTaskSet, removeTaskFromTaskSet, taskSetIsEmpty } from "./TaskSet.js";
 
 let missionDiv = document.querySelector(".mission");
 let currentMission = null;
@@ -95,14 +95,14 @@ const addTask = (task, taskSet) => {
       removeTaskFromTaskSet(taskSet, task);
       updateLocalStorage(allMissions);
       taskDiv.classList.toggle("strikeout");
-      if (taskSet.isEmpty()) {
+      if (taskSetIsEmpty(taskSet)) {
         renderMissionView(currentMission);
       }
     } else {
       if (getMissionTaskSets(currentMission).includes(taskSet)) {
-        currentMission.addTaskSet(taskSet);
+        addTaskSetToMission(currentMission, taskSet);
       }
-      taskSet.addTask(task);
+      addTaskToTaskSet(taskSet, task);
       updateLocalStorage(allMissions);
       taskDiv.classList.toggle("strikeout");
     }
