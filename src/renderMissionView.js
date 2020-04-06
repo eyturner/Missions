@@ -99,7 +99,7 @@ const addTask = (task, taskSet) => {
         renderMissionView(currentMission);
       }
     } else {
-      if (getMissionTaskSets(currentMission).includes(taskSet)) {
+      if (!getMissionTaskSets(currentMission).includes(taskSet)) {
         addTaskSetToMission(currentMission, taskSet);
       }
       addTaskToTaskSet(taskSet, task);
