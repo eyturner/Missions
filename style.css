@@ -70,7 +70,7 @@ body {
 .sidebarMission {
   display: flex;
   align-items: center;
-  height: 30px;
+  min-height: 30px;
   padding: 2% 15px;
 }
 
