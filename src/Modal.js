@@ -86,7 +86,7 @@ const createTaskSetModalBody = () => {
   let titleLabel = document.createElement("label");
   titleLabel.id = "taskSetTitleLabel";
   titleLabel.for = modalTitleInput.id;
-  titleLabel.innerHTML = "TaskSet Title";
+  titleLabel.innerHTML = "Objective Title";
 
   modalTitleDiv.appendChild(titleLabel);
   modalTitleDiv.appendChild(modalTitleInput);
@@ -100,7 +100,7 @@ const createTaskSetModalBody = () => {
   let descriptionLabel = document.createElement("label");
   descriptionLabel.id = "taskSetDescriptionLabel";
   descriptionLabel.for = TaskSetNoteInput.id;
-  descriptionLabel.innerHTML = "TaskSet Note";
+  descriptionLabel.innerHTML = "Objective Note";
 
   TaskSetNoteDiv.appendChild(descriptionLabel);
   TaskSetNoteDiv.appendChild(TaskSetNoteInput);
@@ -130,7 +130,7 @@ const editTaskSetModalBody = (taskSet) => {
   let titleLabel = document.createElement("label");
   titleLabel.id = "taskSetTitleLabel";
   titleLabel.for = modalTitleInput.id;
-  titleLabel.innerHTML = "TaskSet Title";
+  titleLabel.innerHTML = "Objective Title";
 
   modalTitleDiv.appendChild(titleLabel);
   modalTitleDiv.appendChild(modalTitleInput);
@@ -145,7 +145,7 @@ const editTaskSetModalBody = (taskSet) => {
   let descriptionLabel = document.createElement("label");
   descriptionLabel.id = "taskSetDescriptionLabel";
   descriptionLabel.for = TaskSetNoteInput.id;
-  descriptionLabel.innerHTML = "TaskSet Note";
+  descriptionLabel.innerHTML = "Objective Note";
 
   TaskSetNoteDiv.appendChild(descriptionLabel);
   TaskSetNoteDiv.appendChild(TaskSetNoteInput);
@@ -213,7 +213,7 @@ const renderTaskSetModal = () => {
   let modalContentDiv = document.createElement("div");
   modalContentDiv.classList.add("modal-content");
 
-  let modalHeaderDiv = createModalHead("Add TaskSet", "taskSetModal");
+  let modalHeaderDiv = createModalHead("Add Objective", "taskSetModal");
   let modalBodyDiv = createTaskSetModalBody();
   let modalFooterDiv = createModalFooter("taskSetModal");
 
@@ -309,7 +309,7 @@ const deleteTaskSetModal = () => {
   let modalContentDiv = document.createElement("div");
   modalContentDiv.classList.add("modal-content");
 
-  let modalHeaderDiv = createModalHead("Delete TaskSet?", "deleteMissionModal");
+  let modalHeaderDiv = createModalHead("Delete Objective?", "deleteMissionModal");
 
   let modalBodyDiv = document.createElement("div");
   modalBodyDiv.classList.add("modal-body");
