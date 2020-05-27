@@ -309,7 +309,7 @@ const deleteTaskSetModal = () => {
   let modalContentDiv = document.createElement("div");
   modalContentDiv.classList.add("modal-content");
 
-  let modalHeaderDiv = createModalHead("Delete objective?", "deleteMissionModal");
+  let modalHeaderDiv = createModalHead("Delete Objective?", "deleteMissionModal");
 
   let modalBodyDiv = document.createElement("div");
   modalBodyDiv.classList.add("modal-body");
